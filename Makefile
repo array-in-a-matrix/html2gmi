@@ -3,7 +3,6 @@ input_dir := input/
 output_dir := output/
 location := temp.txt
 dest := temp2.txt
-output_files := temp3.txt
 
 setup:
 	go install
@@ -15,32 +14,31 @@ setup:
 		mkdir $(output_dir); \
 	fi
 
-all: setup del_temp
+all: setup clear
 	touch $(location)
 	find -type f -name '*.htm' >> $(location)
 	find -type f -name '*.html' >> $(location)
 	find -type f -name '*.xhtml' >> $(location)
 	
 	sed 's/.\/input/.\/output/g' $(location) | sed 's/\// /g' | awk '{$$NF="";print}' | sed 's/ /\//g' > $(dest) 
-	#sed 's/.\/input/.\/output/g' $(location) | sed 's/.xhtml/.gmi/g;s/.html/.gmi/g;s/.htm/.gmi/g'  > $(output_files) 
 	@# from html files get output directory
 	xargs mkdir -p <$(dest)
 	@#create output directories
 	./script.sh
 
-del_temp:
+clear:
 	@if [ -e $(location) ]; then \
 		rm $(location); \
 	fi
 	@if [ -e $(dest) ]; then \
 		rm $(dest); \
 	fi
-	@if [ -e $(output_files) ]; then \
-		rm $(output_files); \
+	@if [ -d $(output_dir) ]; then \
+		rm -rf $(output_dir); \
 	fi
 
-clean: del_temp
-	rm -rf $(bin) $(output_dir)
+clean: clear
+	rm -rf $(bin) 
 
-purge: clean del_temp
+purge: clean
 	rm -rf $(input_dir)
