@@ -1,2 +1,9 @@
-.hgignore
-.hg/
+# ignore binary
+html2gmi
+
+# ignore input and output directories
+output/
+input/
+
+# ignore temporary files
+temp*.txt
