@@ -1,5 +1,18 @@
 # html2gmi
 
+Makefile allows the conversion of an entire html website to gmi.
+run `make` then place website in `input` directory. Then run `make all` and the converted website should be in `output` directory.
+
+- `make` = compiles go program and creates input/output directories.
+- `make setup` = same as `make`.
+- `make all` = converts htm/html/xhtml files to gmi.
+- `make clear` = temporary files and output directory.
+- `make clean` = same as `make clear` but also deletes  `html2gmi` binary.
+- `make purge` = same as `make clean` but also deletes input directory.
+
+
+---
+
 A command line application to convert HTML to GMI (Gemini text/gemini), written in Go. Written in Go so it should compile on various common platforms (linux/mac/windows etc).
 
 A simple wrapper around the Go library https://github.com/LukeEmmet/html2gemini
