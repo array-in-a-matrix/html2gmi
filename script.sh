@@ -23,3 +23,7 @@ do
   echo "Modified: " $file
 done
 
+for file in $(find input -type f | grep -v '.htm\|.css\|.js')
+do
+  cp --parent $file output 
+done
